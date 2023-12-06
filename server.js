@@ -33,10 +33,10 @@ app.use("/api/v1/product", productRoutes);
 
 //rest api
 app.use("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./Client/build/index.html"));
 });
 
-app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "./Client/build")));
 //Port
 const PORT = process.env.PORT || 8080;
 
