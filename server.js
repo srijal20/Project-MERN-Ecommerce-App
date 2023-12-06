@@ -7,13 +7,17 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
-import path, { dirname } from "path";
+import path from "path";
+import { fileURLToPath } from 'url';
 
 dotenv.config(); //if file is not in root then delclare its inside config
 
 //databsase config
 connectDB();
 
+//esmodule fix
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 //rest object
 const app = express();
 
