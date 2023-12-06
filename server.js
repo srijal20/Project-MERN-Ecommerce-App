@@ -7,8 +7,8 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
-import path from "path";
-import { fileURLToPath } from 'url';
+import path,{dirname} from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config(); //if file is not in root then delclare its inside config
 
@@ -17,7 +17,7 @@ connectDB();
 
 //esmodule fix
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 //rest object
 const app = express();
 
@@ -30,20 +30,20 @@ app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
-app.use(express.static(path.join(__dirname, "./client/build")));
 
 //rest api
 app.use("*", function (req, res) {
-  res.sendFile(path.join(--dirname, "./client.build/index.html"));
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+app.use(express.static(path.join(__dirname, "./client/build")));
 //Port
 const PORT = process.env.PORT || 8080;
 
 //run listen
 app.listen(PORT, () => {
   console.log(
-    `Server running on ${process.env.DEV_MODE} mode on port ${PORT} `.bgCyan
+    `Server is running on port ${PORT} `.bgCyan
       .white
   );
 });
